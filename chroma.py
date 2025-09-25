@@ -1,9 +1,9 @@
 import cv2
 import numpy as np
 
-def create_mask(hsv_frame, color="green"):
+def create_mask(hsv_frame, color="blue"):
     if color == "green":
-        # Faixa do verde (matiz ~100° no HSV, mas no OpenCV vai de 0 a 179)
+        # Faixa do verde 
         lower = np.array([35, 40, 40])   # limite inferior (H, S, V)
         upper = np.array([85, 255, 255]) # limite superior
     elif color == "blue":
@@ -19,21 +19,21 @@ def create_mask(hsv_frame, color="green"):
 
 def main():
     # Carregar a imagem local (a pessoa com fundo verde ou azul)
-    frame = cv2.imread("imagem.jfif")
+    frame = cv2.imread("images/cafe.png")
     if frame is None:
         print("Erro: não consegui carregar a imagem. Verifique o caminho.")
         return
 
     # Pré-carregar imagens de fundo
     backgrounds = [
-        cv2.imread("fundo1.jfif"),
-        cv2.imread("fundo2.jfif"),
-        cv2.imread("fundo3.jfif"),
+        cv2.imread("images/fundo1.jfif"),
+        cv2.imread("images/fundo2.jfif"),
+        cv2.imread("images/fundo3.jfif"),
     ]
     current_bg = 0  # índice do fundo atual
 
     # Define cor inicial (verde)
-    chroma_color = "green"
+    chroma_color = "blue"
 
     while True:
         # Converte para HSV
